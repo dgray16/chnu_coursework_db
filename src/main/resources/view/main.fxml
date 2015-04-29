@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindow">
+  <tabs>
+    <Tab fx:id="circulationTab" closable="false" style="-fx-pref-width: 80;" text="Circulation">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+    <Tab closable="false" style="-fx-pref-width: 80;" text="Books">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+      </content>
+    </Tab>
+      <Tab style="-fx-pref-width: 80;" text="Clients">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+      <Tab style="-fx-pref-width: 80;" text="Publishers">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        </content>
+      </Tab>
+      <Tab style="-fx-pref-width: 80;" text="Authors">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="authorsTable" layoutX="14.0" layoutY="15.0" prefHeight="541.0" prefWidth="475.0">
+                     <columns>
+                        <TableColumn fx:id="authorsNameColumn" prefWidth="103.0" text="Name" />
+                        <TableColumn fx:id="authorSurnameColumn" prefWidth="103.0" text="Surname" />
+                        <TableColumn fx:id="authorsBirthColumn" prefWidth="90.0" text="Birthday" />
+                        <TableColumn fx:id="authorsDeathColumn" prefWidth="103.0" text="Death" />
+                        <TableColumn fx:id="deleteColumn" prefWidth="75.0" text="Delete" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="726.0" layoutY="21.0" mnemonicParsing="false" onAction="#addAuthor" prefHeight="60.0" prefWidth="60.0" text="Add" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="languageTab" style="-fx-pref-width: 80;" text="Languages">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="726.0" layoutY="21.0" maxWidth="60.0" mnemonicParsing="false" onAction="#deleteLanguage" prefHeight="60.0" prefWidth="60.0" text="Delete" />
+                  <Button layoutX="660.0" layoutY="21.0" mnemonicParsing="false" onAction="#addLanguage" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <TableView fx:id="languagesTable" layoutX="14.0" layoutY="14.0" prefHeight="541.0" prefWidth="400.0">
+                     <columns>
+                        <TableColumn fx:id="languageNameColumn" prefWidth="398.0" text="Name" />
+                     </columns>
+                  </TableView>
+               </children></AnchorPane>
+        </content>
+      </Tab>
+      <Tab fx:id="bindingTab" style="-fx-pref-width: 80;" text="Bindings">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="bindingsTable" layoutX="14.0" layoutY="14.0" prefHeight="541.0" prefWidth="400.0">
+                    <columns>
+                      <TableColumn fx:id="bindingTypeColumn" prefWidth="398.0" text="Type" />
+                    </columns>
+                  </TableView>
+                  <Button layoutX="660.0" layoutY="21.0" mnemonicParsing="false" onAction="#addBinding" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <Button layoutX="726.0" layoutY="21.0" maxWidth="60.0" mnemonicParsing="false" onAction="#deleteBinding" prefHeight="60.0" prefWidth="60.0" text="Delete" />
+               </children></AnchorPane>
+        </content>
+      </Tab>
+  </tabs>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</TabPane>

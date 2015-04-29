@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="109.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.language.DeleteLanguage">
+   <children>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="322.0" text="Delete language">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </Label>
+      <ComboBox fx:id="languagesBox" prefHeight="25.0" prefWidth="320.0" promptText="Choose language">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </ComboBox>
+      <Button mnemonicParsing="false" onAction="#delete" prefHeight="25.0" prefWidth="324.0" text="Delete" />
+   </children>
+</VBox>
