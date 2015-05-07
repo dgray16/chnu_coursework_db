@@ -5,6 +5,7 @@ import javax.persistence.*;
 /**
  * Created by Administrator on 12.04.2015.
  */
+
 @Entity
 @Table(name = "book", schema = "", catalog = "library")
 public class BookEntity {
@@ -18,6 +19,14 @@ public class BookEntity {
     private int pages;
     private int languageId;
     private byte numberOfBooks;
+
+    private PublisherEntity publisherById;
+    private AuthorEntity authorById;
+    private BindingEntity bindingById;
+    private LanguageEntity languageById;
+
+    private String publisherByIdName;
+
 
     @Id
     @Column(name = "isbn")
@@ -143,5 +152,49 @@ public class BookEntity {
         result = 31 * result + (int) languageId;
         result = 31 * result + (int) numberOfBooks;
         return result;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "publisher_id", referencedColumnName = "id", nullable = true, insertable = false, updatable = false)
+    public PublisherEntity getPublisherById(){
+        return  publisherById;
+    }
+    public void setPublisherById(PublisherEntity publisherById){
+        this.publisherById = publisherById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id", nullable = true, insertable = false, updatable = false)
+    public AuthorEntity getAuthorById() {
+        return authorById;
+    }
+    public void setAuthorById(AuthorEntity authorById) {
+        this.authorById = authorById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "binding_id", referencedColumnName = "id", nullable = true, insertable = false, updatable = false)
+    public BindingEntity getBindingById() {
+        return bindingById;
+    }
+    public void setBindingById(BindingEntity bindingById) {
+        this.bindingById = bindingById;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "language_id", referencedColumnName = "id", nullable = true, insertable = false, updatable = false)
+    public LanguageEntity getLanguageById() {
+        return languageById;
+    }
+    public void setLanguageById(LanguageEntity languageById) {
+        this.languageById = languageById;
+    }
+
+    @Transient
+    public String getPublisherByIdName() {
+        return publisherByIdName;
+    }
+    public void setPublisherByIdName(String publisherByIdName) {
+        this.publisherByIdName = publisherByIdName;
     }
 }

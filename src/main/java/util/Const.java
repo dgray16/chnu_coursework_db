@@ -16,7 +16,14 @@ public class Const {
     public static final String DELETE_LANGUAGE_FORM_PATH = "/view/language/deleteLanguage.fxml";
 
     public static final String ADD_AUTHOR_FORM_PATH = "/view/author/addAuthor.fxml";
-    public static final String DELETE_AUTHOR_FORM_PATH = "/view/author/deleteAuthor.fxml";
+
+    public static final String ADD_PUBLISHER_FORM_PATH = "/view/publisher/addPublisher.fxml";
+
+    public static final String ADD_CLIENT_FORM_PATH = "/view/client/addClient.fxml";
+
+    public static final String ADD_BOOK_FORM_PATH = "/view/book/addBook.fxml";
+
 
     public static final String WORD_PATTERN = "^[A-z]+$";
+    public static final String ISBN_PATTERN = "^[0-9]{1}\\W[0-9]{4}\\W[0-9]{4}\\W[0-9]{1}$";
 }

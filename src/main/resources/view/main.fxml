@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindow">
+<TabPane fx:id="tabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainWindow">
   <tabs>
     <Tab fx:id="circulationTab" closable="false" style="-fx-pref-width: 80;" text="Circulation">
       <content>
@@ -15,17 +15,55 @@
     </Tab>
     <Tab closable="false" style="-fx-pref-width: 80;" text="Books">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="1126.0" layoutY="21.0" mnemonicParsing="false" onAction="#addBook" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <TableView fx:id="booksTable" layoutX="14.0" layoutY="15.0" prefHeight="541.0" prefWidth="1090.0">
+                     <columns>
+                        <TableColumn fx:id="bookIsbnColumn" prefWidth="133.0" text="ISBN" />
+                        <TableColumn fx:id="bookNameColumn" prefWidth="157.0" text="Name" />
+                        <TableColumn fx:id="bookPublisherColumn" prefWidth="142.0" text="Publisher" />
+                        <TableColumn fx:id="bookAuthorColumn" prefWidth="116.0" text="Author" />
+                        <TableColumn fx:id="bookPriceColumn" prefWidth="78.0" text="Price" />
+                        <TableColumn fx:id="bookBindingColumn" prefWidth="83.0" text="Binding" />
+                        <TableColumn fx:id="bookYearColumn" prefWidth="44.0" text="Year" />
+                        <TableColumn fx:id="bookPagesColumn" prefWidth="47.0" text="Pages" />
+                        <TableColumn fx:id="bookLanguageColumn" prefWidth="82.0" text="Language" />
+                        <TableColumn fx:id="bookQuantityColumn" prefWidth="128.0" text="Quantity" />
+                        <TableColumn fx:id="bookDeleteColumn" minWidth="9.0" prefWidth="78.0" text="Delete" />
+                     </columns>
+                  </TableView>
+               </children></AnchorPane>
       </content>
     </Tab>
       <Tab style="-fx-pref-width: 80;" text="Clients">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="clientsTable" layoutX="14.0" layoutY="15.0" prefHeight="541.0" prefWidth="400.0">
+                     <columns>
+                        <TableColumn fx:id="clientNameColumn" prefWidth="165.0" text="Name" />
+                        <TableColumn fx:id="clientBirthColumn" prefWidth="102.0" text="Birth" />
+                        <TableColumn fx:id="clientBanColumn" prefWidth="68.0" text="Banned" />
+                        <TableColumn fx:id="clientDeleteColumn" prefWidth="63.0" text="Delete" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="1126.0" layoutY="21.0" mnemonicParsing="false" onAction="#addClient" prefHeight="60.0" prefWidth="60.0" text="Add" />
+               </children></AnchorPane>
         </content>
       </Tab>
       <Tab style="-fx-pref-width: 80;" text="Publishers">
         <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Button layoutX="1126.0" layoutY="21.0" mnemonicParsing="false" onAction="#addPublisher" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <TableView fx:id="publishersTable" layoutX="14.0" layoutY="15.0" prefHeight="541.0" prefWidth="400.0">
+                     <columns>
+                        <TableColumn fx:id="publisherNameColumn" prefWidth="341.0" text="Name" />
+                        <TableColumn fx:id="publisherDeleteColumn" prefWidth="57.0" text="Delete" />
+                     </columns>
+                  </TableView>
+               </children></AnchorPane>
         </content>
       </Tab>
       <Tab style="-fx-pref-width: 80;" text="Authors">
@@ -37,11 +75,11 @@
                         <TableColumn fx:id="authorsNameColumn" prefWidth="103.0" text="Name" />
                         <TableColumn fx:id="authorSurnameColumn" prefWidth="103.0" text="Surname" />
                         <TableColumn fx:id="authorsBirthColumn" prefWidth="90.0" text="Birthday" />
-                        <TableColumn fx:id="authorsDeathColumn" prefWidth="103.0" text="Death" />
-                        <TableColumn fx:id="deleteColumn" prefWidth="75.0" text="Delete" />
+                        <TableColumn fx:id="authorsDeathColumn" prefWidth="122.0" text="Death" />
+                        <TableColumn fx:id="authorsDeleteColumn" prefWidth="57.0" text="Delete" />
                      </columns>
                   </TableView>
-                  <Button layoutX="726.0" layoutY="21.0" mnemonicParsing="false" onAction="#addAuthor" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <Button layoutX="1126.0" layoutY="21.0" mnemonicParsing="false" onAction="#addAuthor" prefHeight="60.0" prefWidth="60.0" text="Add" />
                </children></AnchorPane>
         </content>
       </Tab>
@@ -49,8 +87,8 @@
         <content>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <Button layoutX="726.0" layoutY="21.0" maxWidth="60.0" mnemonicParsing="false" onAction="#deleteLanguage" prefHeight="60.0" prefWidth="60.0" text="Delete" />
-                  <Button layoutX="660.0" layoutY="21.0" mnemonicParsing="false" onAction="#addLanguage" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <Button layoutX="1126.0" layoutY="91.0" maxWidth="60.0" mnemonicParsing="false" onAction="#deleteLanguage" prefHeight="60.0" prefWidth="60.0" text="Delete" />
+                  <Button layoutX="1126.0" layoutY="21.0" mnemonicParsing="false" onAction="#addLanguage" prefHeight="60.0" prefWidth="60.0" text="Add" />
                   <TableView fx:id="languagesTable" layoutX="14.0" layoutY="14.0" prefHeight="541.0" prefWidth="400.0">
                      <columns>
                         <TableColumn fx:id="languageNameColumn" prefWidth="398.0" text="Name" />
@@ -68,8 +106,8 @@
                       <TableColumn fx:id="bindingTypeColumn" prefWidth="398.0" text="Type" />
                     </columns>
                   </TableView>
-                  <Button layoutX="660.0" layoutY="21.0" mnemonicParsing="false" onAction="#addBinding" prefHeight="60.0" prefWidth="60.0" text="Add" />
-                  <Button layoutX="726.0" layoutY="21.0" maxWidth="60.0" mnemonicParsing="false" onAction="#deleteBinding" prefHeight="60.0" prefWidth="60.0" text="Delete" />
+                  <Button layoutX="1126.0" layoutY="21.0" mnemonicParsing="false" onAction="#addBinding" prefHeight="60.0" prefWidth="60.0" text="Add" />
+                  <Button layoutX="1126.0" layoutY="91.0" maxWidth="60.0" mnemonicParsing="false" onAction="#deleteBinding" prefHeight="60.0" prefWidth="60.0" text="Delete" />
                </children></AnchorPane>
         </content>
       </Tab>

@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component name="dataSourceStorage">
   <data-source name="MySQL - library@localhost" uuid="34bcc18d-cf05-45d8-931f-91cd4f92b12b">
-    <database-info product="" version="" jdbc-version="" driver-name="" driver-version=""/>
+    <database-info product="MySQL" version="5.6.21" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="library"/>
+    <table name="author" schema="" catalog="library" type="TABLE">
+      <column name="id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgYXV0aG9yIGluIERC" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12" remarks="Rmlyc3QgbmFtZSBvZiBhdXRob3I="/>
+      <column name="surname" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12" remarks="TGFzdCBuYW1lIG9mIGF1dGhvcg=="/>
+      <column name="birth" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="QmlydGhkYXkgb2YgYXV0aG9y"/>
+      <column name="death" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="RGVhdGggb2YgYXV0aG9y"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="binding" schema="" catalog="library" type="TABLE">
+      <column name="id" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="SUQgb2YgYmluZGluZyBvZiBib29r" autoIncrement="true"/>
+      <column name="type" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12" remarks="VHlwZS1uYW1lIG9mIGJpbmRpbmcgb2YgYm9vaw=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="book" schema="" catalog="library" type="TABLE">
+      <column name="isbn" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12" remarks="VW5pcXVlIG51bWJlciBvZiBldmVyeSBib29r"/>
+      <column name="name" sqlType="VARCHAR" precision="70" scale="0" nullable="false" jdbcType="12" remarks="TmFtZSBvZiBib29r"/>
+      <column name="publisher_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgcHVibGlzaGVyIG9mIGJvb2s="/>
+      <column name="author_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgYXV0aG9yIG9mIGJvb2s="/>
+      <column name="price" sqlType="DECIMAL" precision="10" scale="0" nullable="false" jdbcType="3" remarks="UHJpY2Ugb2YgbmV3IGJvb2s="/>
+      <column name="binding_id" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="SUQgb2YgYmluZGluZyB0eXBlIG9mIGJvb2s="/>
+      <column name="year" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="WWVhciBvZiBwdWJsaXNobWVudCBvZiBib29r"/>
+      <column name="pages" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="TnVtYmVyIG9mIHBhZ2VzIGluIGJvb2s="/>
+      <column name="language_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="TGFuZ3VhZ2UgSUQgb2YgYm9vaw=="/>
+      <column name="number_of_books" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="UXVhbnRpdHkgb2YgYm9va3MgaW4gbGlicmFyeQ=="/>
+      <primary-key name="PRIMARY" columns="isbn"/>
+    </table>
+    <table name="circulation" schema="" catalog="library" type="TABLE">
+      <column name="id" sqlType="MEDIUMINT" precision="7" scale="0" nullable="false" jdbcType="4" remarks="SUQgb2YgY2lyY3VsYXRpb24=" autoIncrement="true"/>
+      <column name="book_id" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12" remarks="SVNCTiBvZiBib29r"/>
+      <column name="client_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgY2xpZW50"/>
+      <column name="giving_time" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91" remarks="VGltZSB3aGVuIGxpYnJhcnkgZ2l2ZXMgaXQgdG8gY2xpZW50"/>
+      <column name="receiving_time" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91" remarks="VGltZSB3aGVuIGNsaWVudCByZXR1cm5zIGl0IHRvIGxpYnJhcnk="/>
+      <column name="rent_time" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MzA=" remarks="VGltZSBpbiBkYXlzIHRoYXQgY2xpZW50IGNhbiBrZWVwIGJvb2sgaW4gaGlzIGhhbmRz"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="client" schema="" catalog="library" type="TABLE">
+      <column name="id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgY2xpZW50" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="65" scale="0" nullable="false" jdbcType="12" remarks="RnVsbCBuYW1lIG9mIGNsaWVudA=="/>
+      <column name="birth" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="QmlydGhkYXkgb2YgY2xpZW50"/>
+      <column name="banned" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" def="MA==" remarks="U3RhdHVzIG9mIGNsaWVudA=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="language" schema="" catalog="library" type="TABLE">
+      <column name="id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgbGFuZ3VhZ2U=" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" remarks="TmFtZSBvZiBsYW5ndWFnZQ=="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="publisher" schema="" catalog="library" type="TABLE">
+      <column name="id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgcHVibGlzaGVy" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12" remarks="TmFtZSBvZiBwdWJsaXNoZXI="/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
   </data-source>
 </component>
