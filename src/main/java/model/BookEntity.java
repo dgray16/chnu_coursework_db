@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 /**
  * Created by Administrator on 12.04.2015.
@@ -13,12 +14,13 @@ public class BookEntity {
     private String name;
     private int publisherId;
     private int authorId;
-    private int price;
-    private byte bindingId;
+    private double price;
+    private int bindingId;
     private int year;
     private int pages;
     private int languageId;
     private byte numberOfBooks;
+    private String incomeDate;
 
     private PublisherEntity publisherById;
     private AuthorEntity authorById;
@@ -26,7 +28,9 @@ public class BookEntity {
     private LanguageEntity languageById;
 
     private String publisherByIdName;
-
+    private String authorByIdFullName;
+    private String bindingByIdType;
+    private String languageByIdName;
 
     @Id
     @Column(name = "isbn")
@@ -66,19 +70,19 @@ public class BookEntity {
 
     @Basic
     @Column(name = "price")
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
     @Basic
     @Column(name = "binding_id")
-    public byte getBindingId() {
+    public int getBindingId() {
         return bindingId;
     }
-    public void setBindingId(byte bindingId) {
+    public void setBindingId(int bindingId) {
         this.bindingId = bindingId;
     }
 
@@ -118,6 +122,15 @@ public class BookEntity {
         this.numberOfBooks = numberOfBooks;
     }
 
+    @Basic
+    @Column(name = "income_date")
+    public String getIncomeDate() {
+        return incomeDate;
+    }
+    public void setIncomeDate(String incomeDate) {
+        this.incomeDate = incomeDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -145,7 +158,6 @@ public class BookEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (int) publisherId;
         result = 31 * result + (int) authorId;
-        result = 31 * result + price;
         result = 31 * result + (int) bindingId;
         result = 31 * result + (int) year;
         result = 31 * result + (int) pages;
@@ -196,5 +208,29 @@ public class BookEntity {
     }
     public void setPublisherByIdName(String publisherByIdName) {
         this.publisherByIdName = publisherByIdName;
+    }
+
+    @Transient
+    public String getAuthorByIdFullName() {
+        return authorByIdFullName;
+    }
+    public void setAuthorByIdFullName(String authorByIdFullName) {
+        this.authorByIdFullName = authorByIdFullName;
+    }
+
+    @Transient
+    public String getBindingByIdType() {
+        return bindingByIdType;
+    }
+    public void setBindingByIdType(String bindingByIdType) {
+        this.bindingByIdType = bindingByIdType;
+    }
+
+    @Transient
+    public String getLanguageByIdName() {
+        return languageByIdName;
+    }
+    public void setLanguageByIdName(String languageByIdName) {
+        this.languageByIdName = languageByIdName;
     }
 }

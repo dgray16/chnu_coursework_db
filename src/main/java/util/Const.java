@@ -26,4 +26,6 @@ public class Const {
 
     public static final String WORD_PATTERN = "^[A-z]+$";
     public static final String ISBN_PATTERN = "^[0-9]{1}\\W[0-9]{4}\\W[0-9]{4}\\W[0-9]{1}$";
+    public static final String DECIMAL_NUMBER_PATTERN = "^[0-9]+\\W[0-9]+$";
+    public static final String INTEGER_NUMBER_PATTERN = "^[0-9]+$";
 }

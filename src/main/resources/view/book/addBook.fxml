@@ -5,9 +5,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.book.AddBook">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.book.AddBook">
    <children>
-      <Label alignment="CENTER" prefHeight="17.0" prefWidth="322.0" text="Add book">
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="800.0" text="Add book">
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
@@ -17,11 +17,56 @@
             <Insets bottom="10.0" />
          </VBox.margin>
       </TextField>
-      <TextField fx:id="nameField" focusTraversable="false" promptText="Enter name of book">
+      <TextField fx:id="nameField" focusTraversable="false" onKeyReleased="#toUpperCase" promptText="Enter name of book">
          <VBox.margin>
             <Insets bottom="10.0" />
          </VBox.margin>
       </TextField>
-      <Button mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="324.0" text="Add" />
+      <ComboBox fx:id="publishersBox" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select publisher">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <ComboBox fx:id="authorsBox" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select author">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <TextField fx:id="priceField" focusTraversable="false" promptText="Set price: e.g. 10.00">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </TextField>
+      <ComboBox fx:id="bindingBox" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select binding">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <DatePicker fx:id="yearPicker" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select year">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </DatePicker>
+      <TextField fx:id="pagesField" focusTraversable="false" promptText="Set pages">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </TextField>
+      <ComboBox fx:id="languagesBox" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select language">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <TextField fx:id="bookQuantityField" focusTraversable="false" promptText="Set number of books">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </TextField>
+      <DatePicker fx:id="incomeDatePicker" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select income date">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </DatePicker>
+      <Button mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="800.0" text="Add" />
    </children>
 </VBox>

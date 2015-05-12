@@ -20,17 +20,18 @@
                   <Button layoutX="1126.0" layoutY="21.0" mnemonicParsing="false" onAction="#addBook" prefHeight="60.0" prefWidth="60.0" text="Add" />
                   <TableView fx:id="booksTable" layoutX="14.0" layoutY="15.0" prefHeight="541.0" prefWidth="1090.0">
                      <columns>
-                        <TableColumn fx:id="bookIsbnColumn" prefWidth="133.0" text="ISBN" />
-                        <TableColumn fx:id="bookNameColumn" prefWidth="157.0" text="Name" />
-                        <TableColumn fx:id="bookPublisherColumn" prefWidth="142.0" text="Publisher" />
-                        <TableColumn fx:id="bookAuthorColumn" prefWidth="116.0" text="Author" />
-                        <TableColumn fx:id="bookPriceColumn" prefWidth="78.0" text="Price" />
-                        <TableColumn fx:id="bookBindingColumn" prefWidth="83.0" text="Binding" />
-                        <TableColumn fx:id="bookYearColumn" prefWidth="44.0" text="Year" />
-                        <TableColumn fx:id="bookPagesColumn" prefWidth="47.0" text="Pages" />
-                        <TableColumn fx:id="bookLanguageColumn" prefWidth="82.0" text="Language" />
-                        <TableColumn fx:id="bookQuantityColumn" prefWidth="128.0" text="Quantity" />
-                        <TableColumn fx:id="bookDeleteColumn" minWidth="9.0" prefWidth="78.0" text="Delete" />
+                        <TableColumn fx:id="bookIsbnColumn" editable="false" prefWidth="119.0" text="ISBN" />
+                        <TableColumn fx:id="bookNameColumn" editable="false" prefWidth="136.0" text="Name" />
+                        <TableColumn fx:id="bookPublisherColumn" editable="false" prefWidth="130.0" text="Publisher" />
+                        <TableColumn fx:id="bookAuthorColumn" editable="false" prefWidth="119.0" text="Author" />
+                        <TableColumn fx:id="bookPriceColumn" editable="false" text="Price" />
+                        <TableColumn fx:id="bookBindingColumn" editable="false" prefWidth="89.0" text="Binding" />
+                        <TableColumn fx:id="bookYearColumn" editable="false" prefWidth="56.0" text="Year" />
+                        <TableColumn fx:id="bookPagesColumn" editable="false" prefWidth="49.0" text="Pages" />
+                        <TableColumn fx:id="bookLanguageColumn" editable="false" prefWidth="69.0" text="Language" />
+                        <TableColumn fx:id="bookQuantityColumn" editable="false" prefWidth="78.0" text="Quantity" />
+                        <TableColumn fx:id="bookIncomeColumn" editable="false" prefWidth="68.0" text="Income" />
+                        <TableColumn fx:id="bookDeleteColumn" editable="false" minWidth="9.0" prefWidth="95.0" text="Delete" />
                      </columns>
                   </TableView>
                </children></AnchorPane>

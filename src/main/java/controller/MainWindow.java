@@ -3,6 +3,7 @@ package controller;
 import controller.author.AddAuthor;
 import controller.binding.AddBinding;
 import controller.binding.DeleteBinding;
+import controller.book.AddBook;
 import controller.client.AddClient;
 import controller.language.AddLanguage;
 import controller.language.DeleteLanguage;
@@ -254,6 +255,7 @@ public class MainWindow implements Initializable {
     @FXML TableColumn bookPagesColumn;
     @FXML TableColumn bookLanguageColumn;
     @FXML TableColumn bookQuantityColumn;
+    @FXML TableColumn bookIncomeColumn;
     @FXML TableColumn bookDeleteColumn;
 
     public void addBook(){
@@ -266,12 +268,12 @@ public class MainWindow implements Initializable {
                     root = FXMLLoader.load(getClass().getResource(Const.ADD_BOOK_FORM_PATH));
                 } catch (IOException e) {
                 }
-                Scene scene = new Scene(root, 800, 600);
+                Scene scene = new Scene(root, 760, 440);
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.initModality(Modality.WINDOW_MODAL);
                 stage.initOwner(bindingsTable.getScene().getWindow());
-                AddClient.tableView = clientsTable;
+                AddBook.tableView = booksTable;
                 stage.showAndWait();
             }
         });
@@ -280,13 +282,14 @@ public class MainWindow implements Initializable {
         bookIsbnColumn.setCellValueFactory(new PropertyValueFactory("isbn"));
         bookNameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         bookPublisherColumn.setCellValueFactory(new PropertyValueFactory("publisherByIdName"));
-        /*bookAuthorColumn.setCellValueFactory(new PropertyValueFactory("?"));*/
+        bookAuthorColumn.setCellValueFactory(new PropertyValueFactory("authorByIdFullName"));
         bookPriceColumn.setCellValueFactory(new PropertyValueFactory("price"));
-        /*bookBindingColumn.setCellValueFactory(new PropertyValueFactory("?"));*/
+        bookBindingColumn.setCellValueFactory(new PropertyValueFactory("bindingByIdType"));
         bookYearColumn.setCellValueFactory(new PropertyValueFactory("year"));
         bookPagesColumn.setCellValueFactory(new PropertyValueFactory("pages"));
-        /*bookLanguageColumn.setCellValueFactory(new PropertyValueFactory("?"));*/
+        bookLanguageColumn.setCellValueFactory(new PropertyValueFactory("languageByIdName"));
         bookQuantityColumn.setCellValueFactory(new PropertyValueFactory("numberOfBooks"));
+        bookIncomeColumn.setCellValueFactory(new PropertyValueFactory("incomeDate"));
         bookDeleteColumn.setCellFactory(param -> new ButtonCell("Book"));
     }
 
@@ -353,10 +356,15 @@ public class MainWindow implements Initializable {
                     booksTable.getItems().clear();
 
                     // Get names of fields by their id
-                    List<PublisherEntity> publishersList = Factory.getInstance().<PublisherEntity>getDao().getAll(PublisherEntity.class);
                     int index = 0;
 
+                    List<PublisherEntity> publishersList = Factory.getInstance().<PublisherEntity>getDao().getAll(PublisherEntity.class);
+                    List<AuthorEntity> authorsList = Factory.getInstance().<AuthorEntity>getDao().getAll(AuthorEntity.class);
+                    List<BindingEntity> bindingsList = Factory.getInstance().<BindingEntity>getDao().getAll(BindingEntity.class);
+                    List<LanguageEntity> languagesList = Factory.getInstance().<LanguageEntity>getDao().getAll(LanguageEntity.class);
+
                     for (int i = 0; i < booksList.size(); i++){
+
                         // Find publisher by publisher_id
                         for (int j = 0; j < publishersList.size(); j++){
                             if (booksList.get(i).getPublisherId() == publishersList.get(j).getId()){
@@ -366,13 +374,41 @@ public class MainWindow implements Initializable {
                         }
                         // Put this publisher to publishersList publisherById field
                         booksList.get(i).setPublisherByIdName(publishersList.get(index).getName());
+
+                        // Find author by author_id
+                        for (int j = 0; j < authorsList.size(); j++){
+                            if (booksList.get(i).getAuthorId() == authorsList.get(j).getId()){
+                                index = j;
+                                break;
+                            }
+                        }
+                        // Put this author to authorByIdFullName
+                        booksList.get(i).setAuthorByIdFullName(authorsList.get(index).getName() + " " + authorsList.get(index).getSurname());
+
+                        // Find binding by binding_id
+                        for (int j = 0; j < bindingsList.size(); j++){
+                            if (booksList.get(i).getBindingId() == bindingsList.get(j).getId()){
+                                index = j;
+                                break;
+                            }
+                        }
+                        // Put this binding to bindingByIdType
+                        booksList.get(i).setBindingByIdType(bindingsList.get(index).getType());
+
+                        // Find language by language_id
+                        for (int j = 0; j < languagesList.size(); j++){
+                            if (booksList.get(i).getLanguageId() == languagesList.get(j).getId()){
+                                index = j;
+                                break;
+                            }
+                        }
+                        // Put this language to languageByIdName
+                        booksList.get(i).setLanguageByIdName(languagesList.get(index).getName());
                     }
                     booksTable.getItems().addAll(booksList);
                 }
             }
         });
-
-
     }
     // TODO make ButtonCell class one for all needed tables
     private class ButtonCell extends TableCell<AuthorEntity, AuthorEntity> {
@@ -426,6 +462,56 @@ public class MainWindow implements Initializable {
 
                         booksTable.getItems().clear();
                         List<BookEntity> booksList = Factory.getInstance().<BookEntity>getDao().getAll(BookEntity.class);
+
+                        // Get names of fields by their id
+                        index = 0;
+                        for (int i = 0; i < booksList.size(); i++){
+
+                            // Find publisher by publisher_id
+                            List<PublisherEntity> publishersList = Factory.getInstance().<PublisherEntity>getDao().getAll(PublisherEntity.class);
+                            for (int j = 0; j < publishersList.size(); j++){
+                                if (booksList.get(i).getPublisherId() == publishersList.get(j).getId()){
+                                    index = j;
+                                    break;
+                                }
+                            }
+                            // Put this publisher to publishersList publisherById field
+                            booksList.get(i).setPublisherByIdName(publishersList.get(index).getName());
+
+                            // Find author by author_id
+                            List<AuthorEntity> authorsList = Factory.getInstance().<AuthorEntity>getDao().getAll(AuthorEntity.class);
+                            for (int j = 0; j < authorsList.size(); j++){
+                                if (booksList.get(i).getAuthorId() == authorsList.get(j).getId()){
+                                    index = j;
+                                    break;
+                                }
+                            }
+                            // Put this author to authorByIdFullName
+                            booksList.get(i).setAuthorByIdFullName(authorsList.get(index).getName() + " " + authorsList.get(index).getSurname());
+
+                            // Find binding by binding_id
+                            List<BindingEntity> bindingsList = Factory.getInstance().<BindingEntity>getDao().getAll(BindingEntity.class);
+                            for (int j = 0; j < bindingsList.size(); j++){
+                                if (booksList.get(i).getBindingId() == bindingsList.get(j).getId()){
+                                    index = j;
+                                    break;
+                                }
+                            }
+                            // Put this binding to bindingByIdType
+                            booksList.get(i).setBindingByIdType(bindingsList.get(index).getType());
+
+                            // Find language by language_id
+                            List<LanguageEntity> languagesList = Factory.getInstance().<LanguageEntity>getDao().getAll(LanguageEntity.class);
+                            for (int j = 0; j < languagesList.size(); j++){
+                                if (booksList.get(i).getLanguageId() == languagesList.get(j).getId()){
+                                    index = j;
+                                    break;
+                                }
+                            }
+                            // Put this language to languageByIdName
+                            booksList.get(i).setLanguageByIdName(languagesList.get(index).getName());
+                        }
+
                         booksTable.getItems().addAll(booksList);
                         break;
                     }

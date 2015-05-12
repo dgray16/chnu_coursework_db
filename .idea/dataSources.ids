@@ -21,7 +21,7 @@
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="book" schema="" catalog="library" type="TABLE">
-      <column name="isbn" sqlType="VARCHAR" precision="16" scale="0" nullable="false" jdbcType="12" remarks="VW5pcXVlIG51bWJlciBvZiBldmVyeSBib29r"/>
+      <column name="isbn" sqlType="VARCHAR" precision="13" scale="0" nullable="false" jdbcType="12" remarks="VW5pcXVlIG51bWJlciBvZiBldmVyeSBib29r"/>
       <column name="name" sqlType="VARCHAR" precision="70" scale="0" nullable="false" jdbcType="12" remarks="TmFtZSBvZiBib29r"/>
       <column name="publisher_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgcHVibGlzaGVyIG9mIGJvb2s="/>
       <column name="author_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgYXV0aG9yIG9mIGJvb2s="/>
@@ -31,6 +31,7 @@
       <column name="pages" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="TnVtYmVyIG9mIHBhZ2VzIGluIGJvb2s="/>
       <column name="language_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="TGFuZ3VhZ2UgSUQgb2YgYm9vaw=="/>
       <column name="number_of_books" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="UXVhbnRpdHkgb2YgYm9va3MgaW4gbGlicmFyeQ=="/>
+      <column name="income_date" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
       <primary-key name="PRIMARY" columns="isbn"/>
     </table>
     <table name="circulation" schema="" catalog="library" type="TABLE">
