@@ -4,12 +4,14 @@ import controller.author.AddAuthor;
 import controller.binding.AddBinding;
 import controller.binding.DeleteBinding;
 import controller.book.AddBook;
+import controller.circulation.AddCirculation;
 import controller.client.AddClient;
 import controller.language.AddLanguage;
 import controller.language.DeleteLanguage;
 import controller.publisher.AddPublisher;
 import dao.HibernateUtil;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,6 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import dao.Factory;
@@ -293,14 +296,97 @@ public class MainWindow implements Initializable {
         bookDeleteColumn.setCellFactory(param -> new ButtonCell("Book"));
     }
 
+    // CirculationEntity
+    @FXML TableView<CirculationEntity> circulationTable;
+    @FXML TableColumn circulationBookColumn;
+    @FXML TableColumn circulationClientColumn;
+    @FXML TableColumn circulationGivingColumn;
+    @FXML TableColumn circulationReceivingColumn;
+    @FXML TableColumn circulationRentColumn;
+    @FXML TableColumn circulationDeleteColumn;
+
+    public void addCirculation(){
+        javafx.application.Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Parent root = null;
+                Stage stage = new Stage();
+                try {
+                    root = FXMLLoader.load(getClass().getResource(Const.ADD_CIRCULATION_FORM_PATH));
+                } catch (IOException e) {
+                }
+                Scene scene = new Scene(root, 260, 240);
+                stage.setScene(scene);
+                stage.setResizable(false);
+                stage.initModality(Modality.WINDOW_MODAL);
+                stage.initOwner(bindingsTable.getScene().getWindow());
+                AddCirculation.tableView = circulationTable;
+                stage.showAndWait();
+            }
+        });
+    }
+    private void setUpCirculationTable(){
+        circulationBookColumn.setCellValueFactory(new PropertyValueFactory("bookByIdName"));
+        circulationClientColumn.setCellValueFactory(new PropertyValueFactory("clientByIdName"));
+        circulationGivingColumn.setCellValueFactory(new PropertyValueFactory("givingTime"));
+        circulationRentColumn.setCellValueFactory(new PropertyValueFactory("rentTime"));
+        circulationDeleteColumn.setCellFactory(param -> new ButtonCell("Circulation"));
+
+        circulationReceivingColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        circulationReceivingColumn.setOnEditCommit(new EventHandler<TableColumn.CellEditEvent<CirculationEntity, String>>() {
+            @Override
+            public void handle(TableColumn.CellEditEvent<CirculationEntity, String> event) {
+                event.getTableView().getItems().get(event.getTablePosition().getRow()).setReceivingTime(event.getNewValue());
+            }
+        });
+        circulationReceivingColumn.setCellValueFactory(new PropertyValueFactory("receivingTime"));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Session session = HibernateUtil.getInstance().openSession();
         Arrays.fill(visitedTabs, false);
 
+        // First time whe program starts
+        List<CirculationEntity> circulationList0 = Factory.getInstance().<CirculationEntity>getDao().getAll(CirculationEntity.class);
+        if (visitedTabs[0] == false) {
+            setUpCirculationTable();
+            visitedTabs[0] = true;
+        }
+
+        List<BookEntity> booksList0 = Factory.getInstance().<BookEntity>getDao().getAll(BookEntity.class);
+        List<ClientEntity> clientsList0 = Factory.getInstance().<ClientEntity>getDao().getAll(ClientEntity.class);
+
+        // TODO debug here
+
+        for (int i = 0; i < circulationList0.size(); i++){
+
+            // Find book by book isbn
+            for (int j = 0; j < booksList0.size(); j++){
+                if (booksList0.get(i).getIsbn().equals(circulationList0.get(i).getBookId())){
+                    // Put this bookName to circulationList
+                    circulationList0.get(i).setBookByIdName(booksList0.get(j).getName());
+                    break;
+                }
+            }
+            // Find client by client id
+            for (int j = 0; j < clientsList0.size(); j++){
+                if (clientsList0.get(i).getId() == circulationList0.get(i).getClientId()){
+                    // Put this clientName to circulationList
+                    circulationList0.get(i).setClientByIdName(clientsList0.get(j).getName());
+                    break;
+                }
+            }
+        }
+        circulationTable.getItems().addAll(circulationList0);
+
+/*
+* Thx all for watching. I`m done for today, so tired.
+Good day!
+* */
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue.getText()) {
-                // TODO make all cases for tabs
+
                 case "Bindings": {
                     List<BindingEntity> bindingsList = Factory.getInstance().<BindingEntity>getDao().getAll(BindingEntity.class);
                     if (visitedTabs[6] == false) {
@@ -407,10 +493,43 @@ public class MainWindow implements Initializable {
                     }
                     booksTable.getItems().addAll(booksList);
                 }
+
+                case "Circulation": {
+                    List<CirculationEntity> circulationList = Factory.getInstance().<CirculationEntity>getDao().getAll(CirculationEntity.class);
+                    if (visitedTabs[0] == false) {
+                        setUpCirculationTable();
+                        visitedTabs[0] = true;
+                    }
+                    circulationTable.getItems().clear();
+
+                    List<BookEntity> booksList = Factory.getInstance().<BookEntity>getDao().getAll(BookEntity.class);
+                    List<ClientEntity> clientsList = Factory.getInstance().<ClientEntity>getDao().getAll(ClientEntity.class);
+
+                    for (int i = 0; i < circulationList.size(); i++){
+
+                        // Find book by book isbn
+                        for (int j = 0; j < booksList.size(); j++){
+                            if (booksList.get(i).getIsbn().equals(circulationList.get(i).getBookId())){
+                                // Put this bookName to circulationList
+                                circulationList.get(i).setBookByIdName(booksList.get(j).getName());
+                                break;
+                            }
+                        }
+                        // Find client by client id
+                        for (int j = 0; j < clientsList.size(); j++){
+                            if (clientsList.get(i).getId() == circulationList.get(i).getClientId()){
+                                // Put this clientName to circulationList
+                                circulationList.get(i).setClientByIdName(clientsList.get(j).getName());
+                                break;
+                            }
+                        }
+                    }
+                    circulationTable.getItems().addAll(circulationList);
+                }
             }
         });
     }
-    // TODO make ButtonCell class one for all needed tables
+
     private class ButtonCell extends TableCell<AuthorEntity, AuthorEntity> {
         private Button cellButton;
 
@@ -516,6 +635,37 @@ public class MainWindow implements Initializable {
                         break;
                     }
                     case "Circulation":{
+                        circulationTable.getSelectionModel().select(index);
+                        CirculationEntity circulationEntity = new CirculationEntity();
+                        circulationEntity.setId(circulationTable.getSelectionModel().getSelectedItem().getId());
+                        Factory.getInstance().<CirculationEntity>getDao().delete(circulationEntity);
+
+                        circulationTable.getItems().clear();
+                        List<CirculationEntity> circulationList = Factory.getInstance().<CirculationEntity>getDao().getAll(CirculationEntity.class);
+
+                        List<BookEntity> booksList = Factory.getInstance().<BookEntity>getDao().getAll(BookEntity.class);
+                        List<ClientEntity> clientsList = Factory.getInstance().<ClientEntity>getDao().getAll(ClientEntity.class);
+
+                        for (int i = 0; i < circulationList.size(); i++){
+
+                            // Find book by book isbn
+                            for (int j = 0; j < booksList.size(); j++){
+                                if (booksList.get(i).getIsbn().equals(circulationList.get(i).getBookId())){
+                                    // Put this bookName to circulationList
+                                    circulationList.get(i).setBookByIdName(booksList.get(j).getName());
+                                    break;
+                                }
+                            }
+                            // Find client by client id
+                            for (int j = 0; j < clientsList.size(); j++){
+                                if (clientsList.get(i).getId() == circulationList.get(i).getClientId()){
+                                    // Put this clientName to circulationList
+                                    circulationList.get(i).setClientByIdName(clientsList.get(j).getName());
+                                    break;
+                                }
+                            }
+                        }
+                        circulationTable.getItems().addAll(circulationList);
                         break;
                     }
                 }

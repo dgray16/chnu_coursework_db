@@ -25,7 +25,7 @@
       <column name="name" sqlType="VARCHAR" precision="70" scale="0" nullable="false" jdbcType="12" remarks="TmFtZSBvZiBib29r"/>
       <column name="publisher_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgcHVibGlzaGVyIG9mIGJvb2s="/>
       <column name="author_id" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="SUQgb2YgYXV0aG9yIG9mIGJvb2s="/>
-      <column name="price" sqlType="DECIMAL" precision="10" scale="0" nullable="false" jdbcType="3" remarks="UHJpY2Ugb2YgbmV3IGJvb2s="/>
+      <column name="price" sqlType="DOUBLE" precision="10" scale="2" nullable="false" jdbcType="8" remarks="UHJpY2Ugb2YgbmV3IGJvb2s="/>
       <column name="binding_id" sqlType="TINYINT" precision="3" scale="0" nullable="false" jdbcType="-6" remarks="SUQgb2YgYmluZGluZyB0eXBlIG9mIGJvb2s="/>
       <column name="year" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="WWVhciBvZiBwdWJsaXNobWVudCBvZiBib29r"/>
       <column name="pages" sqlType="SMALLINT" precision="5" scale="0" nullable="false" jdbcType="5" remarks="TnVtYmVyIG9mIHBhZ2VzIGluIGJvb2s="/>

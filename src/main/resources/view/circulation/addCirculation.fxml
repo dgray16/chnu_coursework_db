@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="215.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.circulation.AddCirculation">
+   <children>
+      <Label alignment="CENTER" prefHeight="17.0" prefWidth="800.0" text="Add circulation">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </Label>
+      <ComboBox fx:id="booksBox" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select book">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <ComboBox fx:id="clientsBox" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select client">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </ComboBox>
+      <DatePicker fx:id="givingPicker" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="800.0" promptText="Select giving time">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </DatePicker>
+      <TextField fx:id="rentField" focusTraversable="false" promptText="Set rent time">
+         <VBox.margin>
+            <Insets bottom="10.0" />
+         </VBox.margin>
+      </TextField>
+      <Button mnemonicParsing="false" onAction="#add" prefHeight="25.0" prefWidth="800.0" text="Add" />
+   </children>
+</VBox>

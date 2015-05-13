@@ -12,9 +12,12 @@ public class CirculationEntity {
     private int id;
     private String bookId;
     private int clientId;
-    private Date givingTime;
-    private Date receivingTime;
+    private String givingTime;
+    private String receivingTime;
     private byte rentTime;
+
+    private String bookByIdName;
+    private String clientByIdName;
 
     @Id
     @Column(name = "id")
@@ -45,19 +48,19 @@ public class CirculationEntity {
 
     @Basic
     @Column(name = "giving_time")
-    public Date getGivingTime() {
+    public String getGivingTime() {
         return givingTime;
     }
-    public void setGivingTime(Date givingTime) {
+    public void setGivingTime(String givingTime) {
         this.givingTime = givingTime;
     }
 
     @Basic
     @Column(name = "receiving_time")
-    public Date getReceivingTime() {
+    public String getReceivingTime() {
         return receivingTime;
     }
-    public void setReceivingTime(Date receivingTime) {
+    public void setReceivingTime(String receivingTime) {
         this.receivingTime = receivingTime;
     }
 
@@ -80,7 +83,6 @@ public class CirculationEntity {
         if (id != that.id) return false;
         if (clientId != that.clientId) return false;
         if (rentTime != that.rentTime) return false;
-        if (bookId != null ? !bookId.equals(that.bookId) : that.bookId != null) return false;
         if (givingTime != null ? !givingTime.equals(that.givingTime) : that.givingTime != null) return false;
         if (receivingTime != null ? !receivingTime.equals(that.receivingTime) : that.receivingTime != null)
             return false;
@@ -91,11 +93,27 @@ public class CirculationEntity {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (bookId != null ? bookId.hashCode() : 0);
         result = 31 * result + (int) clientId;
         result = 31 * result + (givingTime != null ? givingTime.hashCode() : 0);
         result = 31 * result + (receivingTime != null ? receivingTime.hashCode() : 0);
         result = 31 * result + (int) rentTime;
         return result;
+    }
+
+    @Transient
+    public String getBookByIdName() {
+        return bookByIdName;
+    }
+    public void setBookByIdName(String bookByIdName) {
+        this.bookByIdName = bookByIdName;
+    }
+
+    @Transient
+
+    public String getClientByIdName() {
+        return clientByIdName;
+    }
+    public void setClientByIdName(String clientByIdName) {
+        this.clientByIdName = clientByIdName;
     }
 }

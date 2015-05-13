@@ -23,6 +23,8 @@ public class Const {
 
     public static final String ADD_BOOK_FORM_PATH = "/view/book/addBook.fxml";
 
+    public static final String ADD_CIRCULATION_FORM_PATH = "/view/circulation/addCirculation.fxml";
+
 
     public static final String WORD_PATTERN = "^[A-z]+$";
     public static final String ISBN_PATTERN = "^[0-9]{1}\\W[0-9]{4}\\W[0-9]{4}\\W[0-9]{1}$";
