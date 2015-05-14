@@ -35,16 +35,16 @@
                      <columns>
                         <TableColumn fx:id="bookIsbnColumn" prefWidth="133.0" text="ISBN" />
                         <TableColumn fx:id="bookNameColumn" prefWidth="157.0" text="Name" />
-                        <TableColumn fx:id="bookPublisherColumn" prefWidth="142.0" text="Publisher" />
-                        <TableColumn fx:id="bookAuthorColumn" prefWidth="116.0" text="Author" />
-                        <TableColumn fx:id="bookPriceColumn" prefWidth="78.0" text="Price" />
-                        <TableColumn fx:id="bookBindingColumn" prefWidth="83.0" text="Binding" />
-                        <TableColumn fx:id="bookYearColumn" prefWidth="44.0" text="Year" />
-                        <TableColumn fx:id="bookPagesColumn" prefWidth="47.0" text="Pages" />
-                        <TableColumn fx:id="bookLanguageColumn" prefWidth="82.0" text="Language" />
-                        <TableColumn fx:id="bookQuantityColumn" prefWidth="75.0" text="Quantity" />
-                        <TableColumn fx:id="bookIncomeColumn" prefWidth="81.0" text="Income date" />
-                        <TableColumn fx:id="bookDeleteColumn" minWidth="9.0" prefWidth="51.0" text="Delete" />
+                        <TableColumn fx:id="bookPublisherColumn" prefWidth="133.0" text="Publisher" />
+                        <TableColumn fx:id="bookAuthorColumn" prefWidth="110.0" text="Author" />
+                        <TableColumn fx:id="bookPriceColumn" prefWidth="77.0" text="Price" />
+                        <TableColumn fx:id="bookBindingColumn" prefWidth="78.0" text="Binding" />
+                        <TableColumn fx:id="bookYearColumn" prefWidth="47.0" text="Year" />
+                        <TableColumn fx:id="bookPagesColumn" prefWidth="51.0" text="Pages" />
+                        <TableColumn fx:id="bookLanguageColumn" prefWidth="77.0" text="Language" />
+                        <TableColumn fx:id="bookQuantityColumn" prefWidth="70.0" text="Quantity" />
+                        <TableColumn fx:id="bookIncomeColumn" prefWidth="79.0" text="Income date" />
+                        <TableColumn fx:id="bookDeleteColumn" minWidth="9.0" prefWidth="75.0" text="Delete" />
                      </columns>
                   </TableView>
                </children></AnchorPane>

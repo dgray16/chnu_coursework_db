@@ -27,14 +27,17 @@ import dao.Factory;
 
 import model.*;
 import org.hibernate.Session;
+import sun.util.calendar.BaseCalendar;
+import sun.util.calendar.LocalGregorianCalendar;
 import util.Const;
 
-import javax.persistence.Table;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.sql.Date;
 
 /**
  * Created by Administrator on 21.04.2015.
@@ -357,13 +360,11 @@ public class MainWindow implements Initializable {
         List<BookEntity> booksList0 = Factory.getInstance().<BookEntity>getDao().getAll(BookEntity.class);
         List<ClientEntity> clientsList0 = Factory.getInstance().<ClientEntity>getDao().getAll(ClientEntity.class);
 
-        // TODO debug here
-
         for (int i = 0; i < circulationList0.size(); i++){
 
             // Find book by book isbn
             for (int j = 0; j < booksList0.size(); j++){
-                if (booksList0.get(i).getIsbn().equals(circulationList0.get(i).getBookId())){
+                if (booksList0.get(j).getIsbn().equals(circulationList0.get(i).getBookId())){
                     // Put this bookName to circulationList
                     circulationList0.get(i).setBookByIdName(booksList0.get(j).getName());
                     break;
@@ -371,7 +372,7 @@ public class MainWindow implements Initializable {
             }
             // Find client by client id
             for (int j = 0; j < clientsList0.size(); j++){
-                if (clientsList0.get(i).getId() == circulationList0.get(i).getClientId()){
+                if (clientsList0.get(j).getId() == circulationList0.get(i).getClientId()){
                     // Put this clientName to circulationList
                     circulationList0.get(i).setClientByIdName(clientsList0.get(j).getName());
                     break;
@@ -380,10 +381,6 @@ public class MainWindow implements Initializable {
         }
         circulationTable.getItems().addAll(circulationList0);
 
-/*
-* Thx all for watching. I`m done for today, so tired.
-Good day!
-* */
         tabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             switch (newValue.getText()) {
 
@@ -493,7 +490,7 @@ Good day!
                     }
                     booksTable.getItems().addAll(booksList);
                 }
-
+                // TODO not needed call when i`m going out of this tab :(
                 case "Circulation": {
                     List<CirculationEntity> circulationList = Factory.getInstance().<CirculationEntity>getDao().getAll(CirculationEntity.class);
                     if (visitedTabs[0] == false) {
@@ -509,7 +506,7 @@ Good day!
 
                         // Find book by book isbn
                         for (int j = 0; j < booksList.size(); j++){
-                            if (booksList.get(i).getIsbn().equals(circulationList.get(i).getBookId())){
+                            if (booksList.get(j).getIsbn().equals(circulationList.get(i).getBookId())){
                                 // Put this bookName to circulationList
                                 circulationList.get(i).setBookByIdName(booksList.get(j).getName());
                                 break;
@@ -517,17 +514,47 @@ Good day!
                         }
                         // Find client by client id
                         for (int j = 0; j < clientsList.size(); j++){
-                            if (clientsList.get(i).getId() == circulationList.get(i).getClientId()){
+                            if (clientsList.get(j).getId() == circulationList.get(i).getClientId()){
                                 // Put this clientName to circulationList
                                 circulationList.get(i).setClientByIdName(clientsList.get(j).getName());
                                 break;
                             }
                         }
+
+
+                        try {
+                            // Set status of client depending on book rent date ends
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                            Calendar endDate = Calendar.getInstance();
+
+                            endDate.setTime(format.parse(circulationList.get(i).getGivingTime()));
+                            endDate.add(Calendar.DATE, circulationList.get(i).getRentTime());
+
+                            Calendar today = Calendar.getInstance();
+                            today.setTime(today.getTime());
+
+                            // TODO NullPointerException
+                            // Bye
+
+                            if (today.after(endDate) && circulationList.get(i).getReceivingTime().equals("")) {
+                                for (int j = 0; j < clientsList.size(); j++){
+                                    if (circulationList.get(i).getClientId() == clientsList.get(j).getId()){
+                                        ClientEntity clientEntity = new ClientEntity();
+                                        clientEntity.setBanned(Byte.parseByte("1"));
+                                        Factory.getInstance().<ClientEntity>getDao().update(clientEntity);
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
                     }
                     circulationTable.getItems().addAll(circulationList);
                 }
             }
         });
+
     }
 
     private class ButtonCell extends TableCell<AuthorEntity, AuthorEntity> {
@@ -650,7 +677,7 @@ Good day!
 
                             // Find book by book isbn
                             for (int j = 0; j < booksList.size(); j++){
-                                if (booksList.get(i).getIsbn().equals(circulationList.get(i).getBookId())){
+                                if (booksList.get(j).getIsbn().equals(circulationList.get(i).getBookId())){
                                     // Put this bookName to circulationList
                                     circulationList.get(i).setBookByIdName(booksList.get(j).getName());
                                     break;
@@ -658,7 +685,7 @@ Good day!
                             }
                             // Find client by client id
                             for (int j = 0; j < clientsList.size(); j++){
-                                if (clientsList.get(i).getId() == circulationList.get(i).getClientId()){
+                                if (clientsList.get(j).getId() == circulationList.get(i).getClientId()){
                                     // Put this clientName to circulationList
                                     circulationList.get(i).setClientByIdName(clientsList.get(j).getName());
                                     break;
